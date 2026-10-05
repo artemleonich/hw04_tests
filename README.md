@@ -1,245 +1,82 @@
-# ✍️ Yatube — Tests
+<p align="center">
+  <img src=".github/assets/banner.svg" width="100%" alt="Yatube · Тесты" />
+</p>
 
-**Unit tests for the Yatube social blogging platform (Django)**
+# Yatube · Тесты
 
-[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![Django](https://img.shields.io/badge/Django-2.2-092E20?style=flat-square&logo=django&logoColor=white)](https://djangoproject.com)
-[![pytest](https://img.shields.io/badge/pytest-5.3-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://pytest.org)
+Проверка моделей, маршрутов, представлений и форм Django.
 
-<div align="center">
+**Учебный проект** · Python · Django 2.2.16 · SQLite · Django TestCase · pytest-django  
+[Русский](#about) · [English](#english) · [Профиль](https://github.com/artemleonich)
 
-🇬🇧 **English** | [🇷🇺 Русский](#%EF%B8%8F-yatube--тесты)
+<a id="about"></a>
 
-</div>
+## О проекте
 
----
+Учебный этап проекта Yatube из курса бэкенд-разработки на Python [Яндекс Практикума](https://practicum.yandex.ru/). Здесь к платформе с текстовыми публикациями добавлены тесты Django.
 
-## 📋 Overview
+- Регистрация и авторизация пользователей.
+- Создание публикаций и редактирование автором.
+- Группы, профили, отдельные страницы записей и пагинация.
+- Тесты моделей, URL, шаблонов, контекста, прав доступа и форм.
 
-This project adds a comprehensive test suite to **Yatube** — a social platform where users can create posts, organize them into groups, and browse other authors' profiles. The focus of this sprint is writing unit tests covering models, URLs, views, and forms of the posts application.
+Содержимое `yatube/posts/tests/` проверяет приложение через Django TestCase. Учебные проверки в корневой папке `tests/` запускаются отдельно через pytest. Версия с комментариями и подписками — [hw05_final](https://github.com/artemleonich/hw05_final).
 
-Built as a project during the Yandex.Practicum Backend Python course.
-
----
-
-## ✨ Features
-
-**Application functionality:**
-
-- User registration and authentication
-- Creating, editing, and viewing posts
-- Organizing posts into thematic groups
-- Author profile pages with post listings
-- Pagination across all list pages
-
-**Test coverage:**
-
-- **test_models.py** — model string representations and field verbosity
-- **test_urls.py** — URL availability, correct templates, and access permissions
-- **test_views.py** — template usage, context data, and pagination
-- **test_forms.py** — post creation and editing via forms
-
----
-
-## 📂 Project Structure
-
-```
-hw04_tests/
-├── yatube/                      # Django project root
-│   ├── posts/                   # Main posts application
-│   │   ├── tests/
-│   │   │   ├── test_models.py   # Model tests
-│   │   │   ├── test_urls.py     # URL routing tests
-│   │   │   ├── test_views.py    # View & template tests
-│   │   │   └── test_forms.py    # Form tests
-│   │   ├── models.py            # Post & Group models
-│   │   ├── views.py             # View functions
-│   │   ├── forms.py             # PostForm
-│   │   ├── urls.py              # URL configuration
-│   │   └── admin.py             # Admin panel setup
-│   ├── about/                   # Static pages (about, tech)
-│   ├── core/                    # Template context processors
-│   ├── users/                   # Custom user management
-│   ├── templates/               # HTML templates
-│   ├── static/                  # CSS & assets
-│   └── manage.py
-├── tests/                       # External test suite
-├── requirements.txt
-├── setup.cfg
-└── pytest.ini
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Python 3.7+
-
-### Installation
+## Запуск
 
 ```bash
 git clone https://github.com/artemleonich/hw04_tests.git
 cd hw04_tests
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-pip install -r requirements.txt
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python yatube/manage.py migrate
+python yatube/manage.py createsuperuser
+python yatube/manage.py runserver
 ```
 
-### Running the App
+В Windows PowerShell: `.venv\Scripts\Activate.ps1`.
+
+Откройте [127.0.0.1:8000](http://127.0.0.1:8000/). Учётная запись суперпользователя нужна для [админ-панели](http://127.0.0.1:8000/admin/), где можно добавить группы.
+
+## Проверка
+
+Запуск собственных тестов Django из корня репозитория:
 
 ```bash
-cd yatube
-python manage.py migrate
-python manage.py runserver
+python yatube/manage.py test posts
 ```
 
-### Running Tests
+Учебные проверки из корня репозитория:
 
 ```bash
-cd yatube
-python manage.py test
+python -m pytest
 ```
 
-Or with pytest from the project root:
+## Навигация по коду
 
-```bash
-pytest
-```
+| Путь | Назначение |
+| --- | --- |
+| [yatube/posts/](yatube/posts/) | Модели, формы и представления |
+| [yatube/templates/](yatube/templates/) | Шаблоны интерфейса |
+| [yatube/yatube/settings.py](yatube/yatube/settings.py) | Настройки и SQLite |
+| [tests/](tests/) | Учебные проверки |
+| [yatube/posts/tests/](yatube/posts/tests/) | Тесты приложения на Django TestCase |
+
+Зависимости сохранены в учебных версиях из [requirements.txt](requirements.txt). Запуск на новых версиях Python может потребовать адаптации окружения.
+
+<a id="english"></a>
+
+<details>
+<summary>English overview</summary>
+
+A Yandex Practicum learning stage focused on Django tests for models, URL access, templates, view context, pagination and forms. The application supports text posts, groups and author profiles. Django tests live in `yatube/posts/tests/`; the root `tests/` directory holds the separate course checks. The [hw05_final](https://github.com/artemleonich/hw05_final) stage adds comments and follows.
+
+Install `requirements.txt` in a virtual environment, run `python yatube/manage.py migrate`, optionally create an admin account with `python yatube/manage.py createsuperuser`, and start `python yatube/manage.py runserver`. Run `python -m pytest` from the repository root for course checks and `python yatube/manage.py test posts` for Django tests. Dependencies are pinned to the original learning versions.
+
+</details>
 
 ---
 
-## 🛠️ Tech Stack
+Автор: [Артём Леонов](https://github.com/artemleonich).
 
-- **Django 2.2** — web framework
-- **pytest** + **pytest-django** — testing
-- **SQLite** — database (development)
-- **django-debug-toolbar** — debugging
-- **sorl-thumbnail** — image processing
-- **mixer** — test data generation
-
----
-
----
-
-# ✍️ Yatube — Тесты
-
-**Юнит-тесты для социальной блог-платформы Yatube (Django)**
-
-[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![Django](https://img.shields.io/badge/Django-2.2-092E20?style=flat-square&logo=django&logoColor=white)](https://djangoproject.com)
-[![pytest](https://img.shields.io/badge/pytest-5.3-0A9EDC?style=flat-square&logo=pytest&logoColor=white)](https://pytest.org)
-
-<div align="center">
-
-[🇬🇧 English](#%EF%B8%8F-yatube--tests) | 🇷🇺 **Русский**
-
-</div>
-
----
-
-## 📋 Обзор
-
-Проект добавляет комплексный набор тестов к **Yatube** — социальной платформе, где пользователи могут создавать посты, объединять их в группы и просматривать профили других авторов. Основной фокус этого спринта — написание юнит-тестов, покрывающих модели, URL-маршрутизацию, представления и формы приложения posts.
-
-Проект выполнен в рамках курса «Бэкенд-разработка на Python» в Яндекс.Практикуме.
-
----
-
-## ✨ Возможности
-
-**Функциональность приложения:**
-
-- Регистрация и аутентификация пользователей
-- Создание, редактирование и просмотр постов
-- Организация постов в тематические группы
-- Страницы профилей авторов со списком их публикаций
-- Пагинация на всех страницах со списками
-
-**Покрытие тестами:**
-
-- **test_models.py** — строковые представления моделей и verbose_name полей
-- **test_urls.py** — доступность URL-адресов, корректные шаблоны и права доступа
-- **test_views.py** — использование шаблонов, контекст и пагинация
-- **test_forms.py** — создание и редактирование постов через формы
-
----
-
-## 📂 Структура проекта
-
-```
-hw04_tests/
-├── yatube/                      # Корень Django-проекта
-│   ├── posts/                   # Основное приложение
-│   │   ├── tests/
-│   │   │   ├── test_models.py   # Тесты моделей
-│   │   │   ├── test_urls.py     # Тесты URL-маршрутов
-│   │   │   ├── test_views.py    # Тесты представлений и шаблонов
-│   │   │   └── test_forms.py    # Тесты форм
-│   │   ├── models.py            # Модели Post и Group
-│   │   ├── views.py             # Функции представлений
-│   │   ├── forms.py             # PostForm
-│   │   ├── urls.py              # Конфигурация URL
-│   │   └── admin.py             # Настройка админ-панели
-│   ├── about/                   # Статические страницы
-│   ├── core/                    # Контекстные процессоры
-│   ├── users/                   # Управление пользователями
-│   ├── templates/               # HTML-шаблоны
-│   ├── static/                  # CSS и статика
-│   └── manage.py
-├── tests/                       # Внешний набор тестов
-├── requirements.txt
-├── setup.cfg
-└── pytest.ini
-```
-
----
-
-## 🚀 Быстрый старт
-
-### Требования
-
-- Python 3.7+
-
-### Установка
-
-```bash
-git clone https://github.com/artemleonich/hw04_tests.git
-cd hw04_tests
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-pip install -r requirements.txt
-```
-
-### Запуск приложения
-
-```bash
-cd yatube
-python manage.py migrate
-python manage.py runserver
-```
-
-### Запуск тестов
-
-```bash
-cd yatube
-python manage.py test
-```
-
-Или с помощью pytest из корня проекта:
-
-```bash
-pytest
-```
-
----
-
-## 🛠️ Технологии
-
-- **Django 2.2** — веб-фреймворк
-- **pytest** + **pytest-django** — тестирование
-- **SQLite** — база данных (разработка)
-- **django-debug-toolbar** — отладка
-- **sorl-thumbnail** — обработка изображений
-- **mixer** — генерация тестовых данных
